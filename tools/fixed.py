@@ -35,6 +35,7 @@ PTRS = {"status": (0x02DEE6, 11)}               # $85DEE6: 最強, Mpower.., ail
 # Menu records drawn with another cell count (id: cells), the next record of the same list giving up as many
 # (relayout()): 1-cell 体/妹 labels -> "Body"/"Sister". No pointer in bank $84 reaches a record after a list's first.
 CELLS = {"84D399": 2, "84D39E": 9, "84D89E": 2, "84D8A3": 10}
+POS = {"84D89E": 0x184}  # records drawn at another tilemap pos: "Sister" left-aligned under "Hero" (issue #2)
 
 
 def glyph_ok(s, w):
@@ -108,8 +109,8 @@ def relayout(fs):
         if f["off"] - 3 != end:
             shift = 0
         n = CELLS.get(f["id"], f["n"])
-        g = dict(f, off=f["off"] + 2 * shift, n=n)
-        if shift or n != f["n"]:
+        g = dict(f, off=f["off"] + 2 * shift, n=n, pos=POS.get(f["id"], f["pos"]))
+        if shift or n != f["n"] or g["pos"] != f["pos"]:
             g["head"] = True
         out.append(g)
         end, shift = f["off"] + 2 * f["n"], shift + n - f["n"]

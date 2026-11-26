@@ -19,6 +19,7 @@ SCENES = {
   name_prompt    = { boot = "300 -;8 a", stop_at = 3000 },
   name_entry     = { boot = "300 -;8 a;160 -;8 right;30 -;8 a", stop_at = 3300 },
   name_confirm   = { boot = "300 -;8 a;160 -;8 a", stop_at = 3300 },
+  name_confirm2  = { boot = "300 -;8 a;160 -;8 a;100 -;8 a;160 -;8 a", stop_at = 3800 },  -- hero + sister
   first_dialogue = { until_mode = 0x33, wait = 150 },
   field_start    = {},
   -- pause menu (Start; takes ~250 frames to take input); tabs 道具 能力 振分 ジョイ 環境, cursor at 道具 after a

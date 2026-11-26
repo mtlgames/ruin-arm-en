@@ -45,6 +45,8 @@ Updated 2026-11-26. History is in git; phase evidence is in `docs/phase8-qa-repo
     `右|左` `体|装` tiles; now `R|L` `B|` (tab = 8 px column in `font.runs`). Scene `menu_items_equip`.
   - Found while testing #2: name-change prompt "Which one?" cursor sat inside "Hero"/"Sister"; text re-spaced and
     its second cursor column moved (`$828048` hook).
+  - #2 comment: new-game "Is everything OK?" screen drew "Sister" 2 tiles right of "Hero" (JP 妹 pos $0188);
+    `fixed.POS` moves it to $0184. Scene `name_confirm2`.
   - #2 hero custom name blank on SNES Mini (Canoe): not reproduced in Mesen (zero/random/$FF power-on RAM; L/R,
     X/Y/Select/Start, B-backs, No/redo paths). Only the entry copy `$84C5E7` writes the record (8 words from
     `$140C`, slot from `[$0400]&7`, = 0 always). Measured in the report photo (scale from a known line): the name
