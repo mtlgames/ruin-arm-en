@@ -36,11 +36,19 @@ Updated 2026-10-31. History is in git; phase evidence is in `docs/phase8-qa-repo
   - Original-ROM comparisons confirmed the eight debug map stalls, shop icon overlap, file-menu icons/numbers
     and several blank/timed messages are original behavior. See `docs/visual-qa-brief.md`.
   - Release script now requires all five visual manifests plus the story-review manifest.
-- **Verified build:** `build/ruinarm_en.sfc` = the v1.0 release above.
+- **Post-release fixes (2026-11-26, not released yet):**
+  - #1 Japanese `左装` equip tag in the item list: palette cells 11/12 of 84:8A27 (tbl `砧儀`) are half-width
+    `右|左` `体|装` tiles; now `R|L` `B|` (tab = 8 px column in `font.runs`). Scene `menu_items_equip`.
+  - Found while testing #2: name-change prompt "Which one?" cursor sat inside "Hero"/"Sister"; text re-spaced and
+    its second cursor column moved (`$828048` hook).
+  - #2 hero custom name blank on SNES Mini (Canoe): not reproduced in Mesen (typed name, zero and random power-on
+    RAM, redo path all fine; RAM `$146A` correct). The user shots fit an all-zero hero record (`{name}` then prints
+    one 16 px blank). Waiting on the reporter for name, steps, save.
+- **Verified build:** `build/ruinarm_en.sfc` = the v1.0 release above plus the post-release fixes (unreleased).
 - **Published 2026-10-31:** repo public; owner created release v1.0
   (https://github.com/minhnhattonthat/ruin-arm-en/releases/tag/v1.0, notes `release/1.0/notes.md`).
 - **Next:** player bug reports via GitHub issues.
-- **Open bugs:** none identified after the final independent phase-8 reviews.
+- **Open bugs:** #2 (needs reporter info, see above).
 - **Remaining RE leads (not release blockers by themselves):** story-flag presets for boss events, opcode lengths
   at $AC8AD6, weapon-type records near 026F80, controls FE/FA/F5/F4/F3, ruin-terminal map location.
 - **Translation notes:** msg 10A9 follows the Japanese branch wording; `docs/polish.md` holds story questions.

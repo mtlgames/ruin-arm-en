@@ -37,7 +37,9 @@ IDS = 0x1400
 STAFF_TEXT = 0xB1EC00       # staff strings: $FF tail of bank $B1 (from $B1:EB54); its pointers are 16-bit, bank $B1
 # Glyph palette record (script en stays empty: marker.DATA): code draws single cells of it by index. Cell: (English,
 # cells it fills). 23 = the red 個 after the shop's count, 21-22 = 全部.
-PALETTE = ("848A27", {21: ("All", 2), 23: ("pc", 1)})
+# Glyph palette cells: 11/12 (tbl 砧儀) are really half-width 右|左 and 体|装, 8 px tiles the item list pairs into the
+# per-row equip tag (hand column + 装 column, issue #1): R / L / B, the 装 column blank.
+PALETTE = ("848A27", {11: ("R\tL", 1), 12: ("B", 1), 21: ("All", 2), 23: ("pc", 1)})
 PASSWORD = (0x011711, "RAIDROID")  # $829711: the 8 words the typed ruin password must match (asm/vwf.asm `password`)
 # Name-entry grids かな/漢1/漢2 -> ABC/abc/Sym (docs/re/text.md §Name entry): (row pointer table, original row count,
 # offsets of that count's immediate in both entry routines $85B1C8/$85BDA0, English rows of 5 + blank + 5 cells).

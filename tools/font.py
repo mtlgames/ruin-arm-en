@@ -21,7 +21,7 @@ TOP = 2           # file row 0 = cell row 2
 SLICE = 0x480     # first slice code
 LAST = 0xFFF
 BLANK = 0x7FF     # the game's blank code: never a slice
-GAP = re.compile(r"( {2,}|\|)")
+GAP = re.compile(r"( {2,}|\||\t)")
 
 
 def parse(path=FONT):
@@ -79,12 +79,15 @@ def ink(s):
 def runs(text):
     """[(x, run)] of a field's plain text. A run is cut at 2+ spaces or at "|". 2+ spaces keep the column a 2-letter-
     a-cell layout gave the run (16 px a pair, a lone space before it 4 px), so code that draws a number or cursor at
-    a fixed cell still lines up; "|" starts the next 2-cell (32 px) unit (command cells picked by index). Letters
+    a fixed cell still lines up; "|" starts the next 2-cell (32 px) unit (command cells picked by index); a tab starts
+    the next 8 px column (half-cell tiles the code places one by one: the item list's equip tags). Letters
     inside a run are set at their advance."""
     out, i, x = [], 0, 0
     for part in GAP.split(text):
         if part == "|":
             x = -(-x // 32) * 32
+        elif part == "\t":
+            x = -(-x // 8) * 8
         elif GAP.fullmatch(part):
             i += len(part)
             x = 16 * (i // 2) + 4 * (i % 2)
@@ -148,6 +151,7 @@ def selftest():
     assert SINGLES["A"] == 0x441 and SINGLES[" "] == 0x420
     assert runs("Yes   No") == [(0, "Yes"), (48, "No")] and runs("Use  (  )")[1] == (36, "(")
     assert runs("Rght|Left") == [(0, "Rght"), (32, "Left")]
+    assert runs("R\tL") == [(0, "R"), (8, "L")]
     s = slices("Items")
     assert len(s) == 2 and s[0][1] == 16 and s[1][1] == adv("Items") - 16 and slices("A   B")[1] is None
     assert len(slices("Status")) == 3 and ink("Status") == adv("Status") - 1

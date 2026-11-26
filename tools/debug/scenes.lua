@@ -25,6 +25,10 @@ SCENES = {
   -- cold boot, left wraps to 環境. 道具/能力/振分 first pick a character (A), then open that character's page (A).
   menu           = { route = "6 start;300 -" },
   menu_items     = { route = "6 start;300 -;6 a;60 -;6 a;120 -" },
+  -- hero holds Marker, Herb x5, Potion (record +$41 ids, +$50 counts) and equips the Marker in the left hand: the
+  -- item list's per-row equip tag (issue #1)
+  menu_items_equip = { writes = { {0x7E14AB, 0x0B}, {0x7E14AC, 0x00}, {0x7E14AD, 0x01}, {0x7E14BA, 1}, {0x7E14BB, 5},
+                       {0x7E14BC, 1} }, route = "6 start;300 -;6 a;60 -;6 a;120 -;6 right;30 -;6 a;120 -" },
   menu_status    = { route = "6 start;300 -;6 right;30 -;6 a;60 -;6 a;120 -" },
   menu_alloc     = { route = "6 start;300 -;6 right;30 -;6 right;30 -;6 a;60 -;6 a;120 -" },
   menu_joy       = { route = "6 start;300 -;6 left;30 -;6 left;30 -;6 a;120 -" },

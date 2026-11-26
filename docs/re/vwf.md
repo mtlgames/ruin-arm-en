@@ -21,8 +21,8 @@ the same. Runs split at 2+ spaces keep the column a 2-letters-a-cell layout gave
 draws at fixed cells still line up); `|` starts the next 2-cell unit (command cells picked by index, `84967B`,
 `8496A4`). Names (`name_hero`/`name_sister`) stay as singles for letter-by-letter name entry (max 7 letters),
 but the menu renderer composes those singles proportionally at runtime.
-The glyph palette record `84:8A27` is patched per cell (`build.PALETTE`: 21-22 `全部` "All", 23 the shop's red `個`
-"pc").
+The glyph palette record `84:8A27` is patched per cell (`build.PALETTE`: 11-12 the equip-tag half cells `右|左 体|装`
+→ `R|L B|`, set on 8 px columns by a tab in the text; 21-22 `全部` "All", 23 the shop's red `個` "pc").
 
 ## Hooks (original bytes asserted by `tools/asm.py` HOOKS)
 
@@ -34,6 +34,7 @@ The glyph palette record `84:8A27` is patched per cell (`build.PALETTE`: 21-22 `
 | `$81E4B9` | `{num}` digit + `$A1` (full-width) | + `$0430` (English digits) |
 | `$81E92E`, `$85EC2D` | cell drawer (and its copy for the name entry): `TXA / CMP #$7F00` | `font_a`/`font_b`: codes `$0400-$0FFF` (not `$07FF`) read their FONT bank (DB = bank, Y = cell), others go back to the original path |
 | `$8296F0` | ruin password: `$140C` 8 words == `$829711` | `password`: same compare, a-z singles folded to A-Z (`build.py` writes `RAIDROID` at `$829711`) |
+| `$828048` | BG cursor columns of the name-change "Which one? Hero Sister" prompt (table `$828046`, caller `$82866B` → `$8488AC`): `$0022, $0032` | second column `$002E` like the Yes/No prompts, so "Sister" (84D83F cell 11) gets 2 cells |
 | `$849B63` | eight-cell dynamic field: `JSL $81E929` once per code | `menu_name`: when the first code is an ASCII single, render the eight codes proportionally into the same eight cleared cells. Later calls in the loop are skipped. Fixed slice fields keep the original drawer; name storage and editing are unchanged |
 | `$80C62A`, `$80C8CF` | world-map glyph loader and tile-list copier | upload an English bitmap alphabet and redirect location-card, frame and Yes/No lists; `worldmap.md` |
 | `$8C8300` | city tileset pointer `$B5A9A8` | relocated compressed art with eleven unused-slot marker tiles translated; all other art and tile indices unchanged |

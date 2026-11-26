@@ -57,6 +57,9 @@ org $8296F0                ; ruin password: name-entry buffer $140C vs the 8 wor
 org $AFEF30                ; title loader: JSL $808F95 (expand the $808F01 unpack in $7F) before its VRAM upload
 	jsl title_logo
 
+org $828048                ; "Which one?  Hero  Sister" (84D83F): 2nd cursor column $32 -> $2E like the Yes/No prompts,
+	dw $002E               ; so "Sister" starts a cell earlier and gets 2 cells of the 13-cell record
+
 org $849B63                ; eight-cell dynamic names: retain their buffer size, compose ASCII proportionally
 	jsl menu_name
 

@@ -90,7 +90,8 @@ patch found (web search 2026-10-30: only an unlinked forum claim; nothing on rom
   structural sweep (`fixed.menu_lists`); the probe's list starts all fall on sweep hits. Includes pause tabs, shop,
   options, status, character profile (race/skill/hobby/likes/dislikes/personality), alchemist (錬金術師) dialogs,
   crafting, name prompts, title `開始 続き`, file menu. Two records look like data (glyph palettes): 84:8A27
-  (`〔/〕○×〔01〕..∞`) and 84:967B / 84:96A4 (two-glyph command cells `右装左装..`, `ｾｰﾌﾞﾌﾟﾛﾃｸﾄ..`): each
+  (`〔/〕○×〔01〕..∞`; its cells 11/12, tbl `砧儀`, are really half-width `右|左` and `体|装`: the item list builds each
+  row's equip tag from one 8 px hand column + the `装` column, issue #1) and 84:967B / 84:96A4 (two-glyph command cells `右装左装..`, `ｾｰﾌﾞﾌﾟﾛﾃｸﾄ..`): each
   2-glyph cell is one command, the code picks cells by index. Check in the phase 5 marker build.
 - `$849B38`-format lists with `7Fxx` words (024C1E, digit cells) are tile data, not text (the sweep rejects them).
 - **Item names**: `$84B2A1`: id < `$DF` → `$8AB96C + offset[$8AB76E + 2*id]`; record stride `$34`, name = 8 glyph
