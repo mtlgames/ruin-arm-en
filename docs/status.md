@@ -1,8 +1,12 @@
 # Status
 
-Updated 2026-10-31. History is in git; phase evidence is in `docs/phase8-qa-report.md`.
+Updated 2026-11-26. History is in git; phase evidence is in `docs/phase8-qa-report.md`.
 
-- **Phase:** 9 (release) complete. Release v1.0 published 2026-10-31.
+- **Phase:** 9 (release) complete. Release v1.1 published 2026-11-26
+  (https://github.com/mtlgames/ruin-arm-en/releases/tag/v1.1, notes `release/1.1/notes.md`): v1.0 + the
+  post-release fixes below; same gates passed. Patched SHA-1 `a48cfaf8757984a9136d3605f137eeab3d3eaf02`,
+  patch SHA-1 `13cef61c6ae6e7ace85c46747c713d52dc7fdb15`. Obsolete QA rounds round1/round3 moved to
+  `work/qa_retired/` (D23).
 - **Release v1.0:** `release/1.0/Ruin_Arm_EN_v1.0.zip` (patch + README only), built 2026-10-31 21:57
   Australia/Sydney by `tools/release.py --version 1.0`: build, 34 tests, smoke, 0 reachable Japanese, all six
   QA gates (321 gameplay, 11 ending, 2053 static gfx, 555 map gfx, 5 gfx fixes, 8 story chapters), patch
@@ -36,7 +40,7 @@ Updated 2026-10-31. History is in git; phase evidence is in `docs/phase8-qa-repo
   - Original-ROM comparisons confirmed the eight debug map stalls, shop icon overlap, file-menu icons/numbers
     and several blank/timed messages are original behavior. See `docs/visual-qa-brief.md`.
   - Release script now requires all five visual manifests plus the story-review manifest.
-- **Post-release fixes (2026-11-26, not released yet):**
+- **Post-release fixes (2026-11-26, in v1.1):**
   - #1 Japanese `左装` equip tag in the item list: palette cells 11/12 of 84:8A27 (tbl `砧儀`) are half-width
     `右|左` `体|装` tiles; now `R|L` `B|` (tab = 8 px column in `font.runs`). Scene `menu_items_equip`.
   - Found while testing #2: name-change prompt "Which one?" cursor sat inside "Hero"/"Sister"; text re-spaced and
@@ -50,7 +54,7 @@ Updated 2026-10-31. History is in git; phase evidence is in `docs/phase8-qa-repo
     the reporter; possible QoL fix (empty name -> default) needs the owner's decision.
   - Title after the full intro (no Start, ~f9300) still showed `ルインアーム` (sprites from loader entry 0); fixed
     in `title_logo`.
-- **Verified build:** `build/ruinarm_en.sfc` = the v1.0 release above plus the post-release fixes (unreleased).
+- **Verified build:** `build/ruinarm_en.sfc` = release v1.1.
 - **Published 2026-10-31:** repo public; owner created release v1.0
   (https://github.com/minhnhattonthat/ruin-arm-en/releases/tag/v1.0, notes `release/1.0/notes.md`).
 - **Next:** player bug reports via GitHub issues.
