@@ -459,6 +459,7 @@ title_logo:                    ; D10: blank the katakana ルインアーム abov
 	php
 	rep #$30
 	lda $05,s                  ; the loader's pushed X: table $AFEED4 index, 4 = $AFB1CD -> VRAM $6000 (BG chr)
+	beq .e0
 	cmp #$0004
 	bne +
 	lda #$0000
@@ -468,6 +469,21 @@ title_logo:                    ; D10: blank the katakana ルインアーム abov
 	dex
 	bpl -
 +	plp
+	rtl
+.e0:                           ; 0 = the same art -> $5000, shown after the full intro: katakana are OBJ tiles $0F,
+	lda #$0000                 ; $13-$1F there (sprites 38-51); tiles 3-$10 are the copyright line, keep them
+	ldx #$021E
+-	sta $7F01E0,x              ; $7F01E0 + $80..$21E = tiles $13-$1F ($7F0260-$7F03FF); +0..$1E = tile $0F
+	dex
+	dex
+	cpx #$0080
+	bcs -
+	ldx #$001E
+-	sta $7F01E0,x
+	dex
+	dex
+	bpl -
+	plp
 	rtl
 
 menu_name:

@@ -41,9 +41,15 @@ Updated 2026-10-31. History is in git; phase evidence is in `docs/phase8-qa-repo
     `右|左` `体|装` tiles; now `R|L` `B|` (tab = 8 px column in `font.runs`). Scene `menu_items_equip`.
   - Found while testing #2: name-change prompt "Which one?" cursor sat inside "Hero"/"Sister"; text re-spaced and
     its second cursor column moved (`$828048` hook).
-  - #2 hero custom name blank on SNES Mini (Canoe): not reproduced in Mesen (typed name, zero and random power-on
-    RAM, redo path all fine; RAM `$146A` correct). The user shots fit an all-zero hero record (`{name}` then prints
-    one 16 px blank). Waiting on the reporter for name, steps, save.
+  - #2 hero custom name blank on SNES Mini (Canoe): not reproduced in Mesen (zero/random/$FF power-on RAM; L/R,
+    X/Y/Select/Start, B-backs, No/redo paths). Only the entry copy `$84C5E7` writes the record (8 words from
+    `$140C`, slot from `[$0400]&7`, = 0 always). Measured in the report photo (scale from a known line): the name
+    is exactly one 16 px blank cell = all-zero record, i.e. the entry buffer was empty at Done. Original-game paths
+    to that: empty names are accepted, each entry clears the buffer, and a re-entered entry keeps the cursor on
+    Done (e.g. Change it? > Hero > Custom > A). The anti-copier SRAM/PAL checks fail loudly, not this. Open: ask
+    the reporter; possible QoL fix (empty name -> default) needs the owner's decision.
+  - Title after the full intro (no Start, ~f9300) still showed `ルインアーム` (sprites from loader entry 0); fixed
+    in `title_logo`.
 - **Verified build:** `build/ruinarm_en.sfc` = the v1.0 release above plus the post-release fixes (unreleased).
 - **Published 2026-10-31:** repo public; owner created release v1.0
   (https://github.com/minhnhattonthat/ruin-arm-en/releases/tag/v1.0, notes `release/1.0/notes.md`).
