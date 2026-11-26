@@ -56,7 +56,10 @@ Updated 2026-11-26. History is in git; phase evidence is in `docs/phase8-qa-repo
     the reporter; possible QoL fix (empty name -> default) needs the owner's decision.
   - Title after the full intro (no Start, ~f9300) still showed `ルインアーム` (sprites from loader entry 0); fixed
     in `title_logo`.
-- **Verified build:** `build/ruinarm_en.sfc` = release v1.1.
+- **Release v1.2 published 2026-11-26** (https://github.com/mtlgames/ruin-arm-en/releases/tag/v1.2, notes
+  `release/1.2/notes.md`): v1.1 + "Sister" alignment (#2 comment); same gates passed. Patched SHA-1
+  `0c77049536b674f49a0d4fa0f263157c46e33dbc`, patch SHA-1 `277023400227257cf8358891f7dfbabbafaa2fc0`.
+- **Verified build:** `build/ruinarm_en.sfc` = release v1.2.
 - **Published 2026-10-31:** repo public; owner created release v1.0
   (https://github.com/minhnhattonthat/ruin-arm-en/releases/tag/v1.0, notes `release/1.0/notes.md`).
 - **Next:** player bug reports via GitHub issues.
